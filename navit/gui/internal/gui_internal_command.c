@@ -1145,6 +1145,8 @@ static int gui_internal_cmd2(struct gui_priv *this, char *function, struct attr 
         gui_internal_cmd2_bookmarks(this, function, in, out);
     else if(!strcmp(function, "formerdests"))
         gui_internal_cmd_formerdests(this, function, in, out);
+    else if(!strcmp(function, "loadfile"))
+        gui_internal_cmd2_bookmarks(this, function, in, out);
     else if(!strcmp(function, "locale"))
         gui_internal_cmd2_locale(this, function, in, out);
     else if(!strcmp(function, "network_info"))
@@ -1187,6 +1189,7 @@ static struct command_table commands[] = {
     {"bookmarks",command_cast(gui_internal_cmd2)},
     {"debug",command_cast(gui_internal_cmd_debug)},
     {"formerdests",command_cast(gui_internal_cmd2)},
+    {"loadfile",command_cast(gui_internal_cmd2)},
     {"get_data",command_cast(gui_internal_get_data)},
     {"img",command_cast(gui_internal_cmd_img)},
     {"locale",command_cast(gui_internal_cmd2)},
