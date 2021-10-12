@@ -105,7 +105,7 @@ static void popup_traffic_distortion_delay(struct item *item, int delay) {
     popup_traffic_distortion(item,buffer);
 }
 
-static void popup_set_destination(struct navit *nav, struct pcoord *pc) {
+void popup_set_destination(struct navit *nav, struct pcoord *pc) {
     struct coord c;
     struct coord_geo g;
     char buffer[1024 +10]; /* +10 for "Map Point "*/
@@ -120,6 +120,8 @@ static void popup_set_destination(struct navit *nav, struct pcoord *pc) {
 
 
 void popup_set_visitbefore(struct navit *nav, struct pcoord *pc,int visitbefore) {
+    printf("x1: %d \n", pc->x); 
+    printf("y1: %d \n", pc->y);
     struct pcoord *dst;
     char buffer[1024];
     int i, dstcount_new;
@@ -127,6 +129,7 @@ void popup_set_visitbefore(struct navit *nav, struct pcoord *pc,int visitbefore)
     dstcount_new=navit_get_destination_count(nav)+1;
     dst=g_alloca(dstcount_new*sizeof(struct pcoord));
     navit_get_destinations(nav,dst,dstcount_new);
+    
     for (i=dstcount_new-1; i>visitbefore; i--) {
         dst[i]=dst[i-1];
     }
@@ -157,8 +160,9 @@ static void popup_set_bookmark(struct navit *nav, struct pcoord *pc) {
 
 extern void *vehicle;
 
-static void popup_set_position(struct navit *nav, struct pcoord *pc) {
+void popup_set_position(struct navit *nav, struct pcoord *pc) {
     dbg(lvl_debug,"%p %p", nav, pc);
+    printf("set position \n");
     navit_set_position(nav, pc);
 }
 

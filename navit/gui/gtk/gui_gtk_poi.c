@@ -329,12 +329,13 @@ static void button_visit_clicked(GtkWidget *widget, struct gtk_poi_search *searc
     GtkTreeViewColumn *focus_column;
     GtkTreeIter iter;
     long int lat,lon;
-
+    print("button_visit_clicked\n");
     gtk_tree_view_get_cursor(GTK_TREE_VIEW(search->treeview_poi), &path, &focus_column);
     if(!path) return;
     if(!gtk_tree_model_get_iter(GTK_TREE_MODEL(search->store_poi_sorted), &iter, path)) return;
     gtk_tree_model_get(GTK_TREE_MODEL(search->store_poi_sorted), &iter, 3, &lat, -1);
     gtk_tree_model_get(GTK_TREE_MODEL(search->store_poi_sorted), &iter, 4, &lon, -1);
+    printf("Set next visit to %ld, %ld \n",lat,lon);
     dbg(lvl_debug,_("Set next visit to %ld, %ld "),lat,lon);
     navit_populate_search_results_map(search->nav, NULL, NULL);	/* Remove any highlighted point on the map */
 

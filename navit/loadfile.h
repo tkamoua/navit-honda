@@ -26,7 +26,7 @@ extern "C" {
 
 /* prototypes */
 
-int loadfile_load_route(struct navit *nav, struct pcoord *c, const char *description);
+
 
 #ifdef __cplusplus
 }

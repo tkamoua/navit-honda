@@ -2485,10 +2485,10 @@ static void gui_internal_cmd_enter_coord_do(struct gui_priv *this, struct widget
 
     /* possible entry can be identical to coord_format output but only space between lat and lng is allowed */
     widgettext=g_ascii_strup(widget->text,-1);
-
+    printf("lat, lon: %s, %s\n", lat, lng);
     lat=strtok(widgettext," ");
     lng=strtok(NULL,"");
-
+    printf("lat1, lon1: %s, %s\n", lat, lng);
     if(!lat || !lng) {
         g_free(widgettext);
         return;

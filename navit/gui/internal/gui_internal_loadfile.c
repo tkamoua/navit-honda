@@ -16,8 +16,111 @@
 #include "gui_internal_menu.h"
 #include "gui_internal_keyboard.h"
 
+#define DEST_SIZE 100
+int loadfile_load_route(struct navit *nav, struct pcoord *c, const char *description);
+int gui_internal_coordinate_parse(char *s, char plus, char minus, double *x) {
+    int sign=0;
+    char *degree, *minute, *second;
+    double tmp;
 
-// Todo: Modify this function to load the route from file. 
+    if(!s)
+        return 0;
+
+    if (strchr(s, minus)!=NULL)
+        sign=-1;
+    else if (strchr(s, plus)!=NULL)
+        sign=1;
+
+    if(!sign)
+        return 0;
+
+
+    /* Can't just use strtok here because ° is multibyte sequence in utf8 */
+    degree=s;
+    minute=strstr(s,"°");
+    if(minute) {
+        *minute=0;
+        minute+=strlen("°");
+    }
+
+    sscanf(degree, "%lf", x);
+
+    if(strchr(degree, plus) || strchr(degree, minus)) {
+        dbg(lvl_debug,"degree %c/%c found",plus,minus);
+    } else {/* DEGREES_MINUTES */
+        if(!minute)
+            return 0;
+        minute = strtok(minute,"'");
+        sscanf(minute, "%lf", &tmp);
+        *x+=tmp/60;
+        if(strchr(minute, plus) || strchr(minute, minus)) {
+            dbg(lvl_debug,"minute %c/%c found",plus,minus);
+        } else { /* DEGREES_MINUTES_SECONDS */
+            second=strtok(NULL,"");
+            if(!second)
+                return 0;
+            sscanf(second, "%lf", &tmp);
+            *x+=tmp/3600;
+        }
+    }
+    *x *= sign;
+    return 1;
+}
+
+//TODO: Load route in correct oder (should call visit_before starting from last element of file)
+// Probably easier to do this as a preprocessing step in python 
+// TODO: need to lower number of gps points or make routing algorithm more efficient, currently super slow
+// TODO: This function should execute "stop navigation" funcationality at start to get rid of any currently displayed routes
+// so we cna display the new route from the file 
+// Note: all route files need to be placed into "navit-build/navit/routes" folder
+
+int loadfile_load_route(struct navit *nav, struct pcoord *c, const char *description){
+    //$NAVIT_SHAREDIR/routes/
+    //Read route from file into route object, which should just be list of lat/lon pairs 
+    printf("Loadfile function! \n");
+    char * line = NULL;
+    size_t len = 0;
+    ssize_t read;
+
+    char dest[DEST_SIZE] = "routes/";
+    strcat(dest,description);
+    FILE *in_file  = fopen(dest, "r"); // read only 
+    if (in_file == NULL) 
+            {   
+              printf("Error! Could not open file\n"); 
+            } 
+    
+    int count = 0; 
+    while ((read = getline(&line, &len, in_file)) != -1) {
+        
+        printf("Retrieved line of length %zu:\n", read);
+        printf("%s", line);
+        char *lat=strtok(line," ");
+        char *lng=strtok(NULL,"");
+        double latitude, longitude;
+        printf("lat2, lon2: %s, %s\n", lat, lng);
+        
+        if( gui_internal_coordinate_parse(lat, 'N', 'S', &latitude)
+            && gui_internal_coordinate_parse(lng, 'E', 'W', &longitude) ) {
+        char *widgettext=g_strdup_printf("%lf %lf", longitude, latitude);
+        pcoord_parse(widgettext, projection_mg, c );
+        if (count == 0){
+            popup_set_position(nav, c);
+        }
+        else{
+            popup_set_visitbefore(nav,c,0);
+        }
+        count+=1;
+        
+    } 
+    }
+    fclose(in_file);
+    //call visit before on each point
+   
+   printf("popup_set_visitbefore\n");
+   return 1;
+}
+
 // I think widghet -> text contains the user entered text, need to replace bookmarks_add_bookmark
 // call with my own function that loads a route fro ma file.
 static void gui_internal_cmd_load_route_do(struct gui_priv *this, struct widget *widget) {

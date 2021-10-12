@@ -10,6 +10,7 @@ set(POTFILES
 	${PROJECT_SOURCE_DIR}/navit/route.c
 	${PROJECT_SOURCE_DIR}/navit/vehicle.c
 	${PROJECT_SOURCE_DIR}/navit/bookmarks.c
+	${PROJECT_SOURCE_DIR}/navit/loadfile.c
 	${PROJECT_SOURCE_DIR}/navit/gui/gtk/destination.c
 	${PROJECT_SOURCE_DIR}/navit/gui/gtk/gui_gtk_action.c
 	${PROJECT_SOURCE_DIR}/navit/gui/gtk/gui_gtk_poi.c
