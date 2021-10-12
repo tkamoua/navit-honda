@@ -801,6 +801,16 @@ static int gui_internal_cmd2_bookmarks(struct gui_priv *this, char *function, st
     return 0;
 }
 
+static int gui_internal_cmd2_loadfile(struct gui_priv *this, char *function, struct attr **in, struct attr ***out) {
+    char *str=NULL;
+    if (in && in[0] && ATTR_IS_STRING(in[0]->type)) {
+        str=in[0]->u.str;
+    }
+
+    gui_internal_cmd_loadfile(this, NULL, str);
+    return 0;
+}
+
 static int gui_internal_cmd2_abort_navigation(struct gui_priv *this, char *function, struct attr **in,
         struct attr ***out) {
     navit_set_destination(this->nav, NULL, NULL, 0);
@@ -1146,7 +1156,7 @@ static int gui_internal_cmd2(struct gui_priv *this, char *function, struct attr 
     else if(!strcmp(function, "formerdests"))
         gui_internal_cmd_formerdests(this, function, in, out);
     else if(!strcmp(function, "loadfile"))
-        gui_internal_cmd2_bookmarks(this, function, in, out);
+        gui_internal_cmd2_loadfile(this, function, in, out);
     else if(!strcmp(function, "locale"))
         gui_internal_cmd2_locale(this, function, in, out);
     else if(!strcmp(function, "network_info"))

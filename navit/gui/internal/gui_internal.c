@@ -83,6 +83,7 @@
 #include "gui_internal_priv.h"
 #include "gui_internal_html.h"
 #include "gui_internal_bookmark.h"
+#include "gui_internal_loadfile.h"
 #include "gui_internal_menu.h"
 #include "gui_internal_search.h"
 #include "gui_internal_gesture.h"
@@ -1551,7 +1552,90 @@ void gui_internal_cmd_bookmarks(struct gui_priv *this, struct widget *wm, void *
         gui_internal_menu_render(this);
 }
 
+/**
+  * The "LoadFile" section of the OSD
+  *
+  */
+void gui_internal_cmd_loadfile(struct gui_priv *this, struct widget *wm, void *data) {
+    struct attr attr,mattr;
+    struct item *item;
+    char *label_full,*prefix=0;
+    int plen=0,hassub,found=0;
+    struct widget *wb,*w,*wbm;
+    struct coord c;
+    struct widget *tbl, *row;
 
+    if (data)
+        prefix=g_strdup(data);
+    else {
+        if (wm && wm->prefix)
+            prefix=g_strdup(wm->prefix);
+    }
+    if ( prefix )
+        plen=strlen(prefix);
+
+    gui_internal_prune_menu_count(this, 1, 0);
+    wb=gui_internal_menu(this, _("Load from file"));
+    wb->background=this->background;
+    w=gui_internal_box_new(this, gravity_top_center|orientation_vertical|flags_expand|flags_fill);
+    //w->spy=this->spacing*3;
+    gui_internal_widget_append(wb, w);
+
+    if(navit_get_attr(this->nav, attr_bookmarks, &mattr, NULL) ) {
+        
+
+        // Adds the Bookmark folders
+        wbm=gui_internal_button_new_with_callback(this, _("Load from folder"),
+                image_new_xs(this, "gui_active"), gravity_left_center|orientation_horizontal|flags_fill,
+                gui_internal_cmd_add_route_folder2, NULL);
+        gui_internal_widget_append(w, wbm);
+
+
+        tbl=gui_internal_widget_table_new(this,gravity_left_top | flags_fill | flags_expand |orientation_vertical,1);
+        gui_internal_widget_append(w,tbl);
+
+        while ((item=bookmarks_get_item(mattr.u.bookmarks))) {
+            if (!item_attr_get(item, attr_label, &attr)) continue;
+            label_full=map_convert_string_tmp(item->map,attr.u.str);
+            dbg(lvl_info,"full_labled: %s",label_full);
+
+            // hassub == 1 if the item type is a sub-folder
+            if (item->type == type_bookmark_folder) {
+                hassub=1;
+            } else {
+                hassub=0;
+            }
+
+            row=gui_internal_widget_table_row_new(this,gravity_left| flags_fill| orientation_horizontal);
+            gui_internal_widget_append(tbl, row);
+            wbm=gui_internal_button_new_with_callback(this, label_full,
+                    image_new_xs(this, hassub ? "gui_inactive" : "gui_active" ), gravity_left_center|orientation_horizontal|flags_fill,
+                    hassub ? gui_internal_cmd_bookmarks : gui_internal_cmd_position, NULL);
+
+            gui_internal_widget_append(row,wbm);
+            if (item_coord_get(item, &c, 1)) {
+                wbm->c.x=c.x;
+                wbm->c.y=c.y;
+                wbm->c.pro=bookmarks_get_projection(mattr.u.bookmarks);
+                wbm->name=g_strdup_printf(_("Bookmark %s"),label_full);
+                wbm->text=g_strdup(label_full);
+                if (!hassub) {
+                    wbm->data=(void*)7;//Mark us as a bookmark
+                }
+                wbm->prefix=g_strdup(label_full);
+            } else {
+                gui_internal_widget_destroy(this, row);
+            }
+        }
+    }
+
+    g_free(prefix);
+
+    if (found)
+        gui_internal_check_exit(this);
+    else
+        gui_internal_menu_render(this);
+}
 
 
 static void gui_internal_keynav_highlight_next(struct gui_priv *this, int dx, int dy, int rotary);

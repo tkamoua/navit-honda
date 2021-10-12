@@ -198,7 +198,6 @@ static GtkActionEntry entries[] = {
     { "DisplayMenuAction", NULL, _n("_Display") },
     { "RouteMenuAction", NULL, _n("_Route") },
     { "FormerDestinationMenuAction", NULL, _n("_Former Destinations") },
-    { "LoadFileAction", NULL, _n("_Load File") },
     { "BookmarkMenuAction", NULL, _n("_Bookmarks") },
     { "MapMenuAction", NULL, _n("_Map") },
     { "LayoutMenuAction", NULL, _n("_Layout") },
@@ -390,11 +389,8 @@ static char layout[] =
 				<menuitem name=\"Destination\" action=\"DestinationAction\" />\
 				<menuitem name=\"POI\" action=\"POIAction\" />\
 				<menuitem name=\"Clear\" action=\"RouteClearAction\" />\
-				<menu name=\"FormerDddestinations\" action=\"FormerDestinationMenuAction\">\
+				<menu name=\"FormerDestinations\" action=\"FormerDestinationMenuAction\">\
 					<placeholder name=\"FormerDestinationMenuAdditions\" />\
-				</menu>\
-                <menu name=\"Load File\" action=\"LoadFileAction\">\
-					<placeholder name=\"LoadFileAdditions\" />\
 				</menu>\
 				<menu name=\"Bookmarks\" action=\"BookmarkMenuAction\">\
 					<placeholder name=\"BookmarkMenuAdditions\" />\

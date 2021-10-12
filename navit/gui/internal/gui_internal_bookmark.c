@@ -129,6 +129,7 @@ void gui_internal_cmd_add_bookmark_folder2(struct gui_priv *this, struct widget 
     gui_internal_menu_render(this);
 }
 
+
 void gui_internal_cmd_rename_bookmark(struct gui_priv *this, struct widget *wm, void *data) {
     struct widget *w,*wb,*wk,*wl,*we,*wnext;
     char *name=wm->text;

@@ -209,6 +209,7 @@ void gui_internal_cmd_position_do(struct gui_priv *this, struct pcoord *pc_in, s
                                   struct widget *wm, const char *name, int flags);
 void gui_internal_cmd_position(struct gui_priv *this, struct widget *wm, void *data);
 void gui_internal_cmd_bookmarks(struct gui_priv *this, struct widget *wm, void *data);
+void gui_internal_cmd_loadfile(struct gui_priv *this, struct widget *wm, void *data);
 void gui_internal_keypress_do(struct gui_priv *this, char *key);
 char *gui_internal_cmd_match_expand(char *pattern, struct attr **in);
 int gui_internal_set(char *remove, char *add);
