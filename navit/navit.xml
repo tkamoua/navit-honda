@@ -466,33 +466,47 @@ Waypoint</text></img>
 
 		<!-- TOP LEFT -->
 <!-- Distance to Next Maneouvre -->
-<osd enabled="yes" type="text" label="${navigation.item[1].length[named]}" x="0" y="0" font_size="350" w="75" h="30" align="0" background_color="#000000c8" osd_configuration="2" />
+<!-- <osd enabled="yes" type="text" label="${navigation.item[1].length[named]}" x="0" y="0" font_size="350" w="75" h="30" align="0" background_color="#000000c8" osd_configuration="2" /> -->
+<osd enabled="yes" type="text" label="500m" x="0" y="0" font_size="350" w="75" h="30" align="0" background_color="#000000c8" osd_configuration="2" />
 <!-- Next Maneouvre Icon -->
-<osd enabled="yes" type="navigation_next_turn" x="0" y="30" background_color="#000000c8" w="75" osd_configuration="2" />
-<!-- Next Road -->
-<osd enabled="yes" type="text" label="   ${navigation.item[1].street_name} ${navigation.item[1].street_name_systematic}" x="75" y="0" font_size="450" w="824" h="40" align="4" background_color="#000000c8" osd_configuration="2" />
+<!-- <osd enabled="yes" type="navigation_next_turn" x="0" y="30" background_color="#000000c8" w="75" osd_configuration="2" /> -->
+<osd name="turn" enabled="yes" type="button" x="0" y="30" w="75" src="$HOME/navit-build/navit/icons/nav_left_2_wh.svg" osd_configuration="2" use_overlay="1" background_color="#000000c8" accesskey=" " command='' />
+<!-- Next Road --> 
+<!-- <osd enabled="yes" type="text" label="   ${navigation.item[1].street_name} ${navigation.item[1].street_name_systematic}" x="75" y="0" font_size="450" w="567" h="40" align="4" background_color="#000000c8" osd_configuration="2" /> -->
+<osd enabled="yes" type="text" label="Hill St" x="75" y="0" font_size="450" w="567" h="40" align="4" background_color="#000000c8" osd_configuration="2" />
 
 <!-- TOP RIGHT -->
-<!-- Odometer -->
-<osd enabled="yes" type="odometer" w="125" h="20"  x="-125" y="0" font_size="300" label="${avg_spd}mph" align="8" autostart="true" background_color="#000000c8"/>
 <!-- Route Distance -->
-<osd enabled="yes" type="text" label="DTG ${navigation.item.destination_length[named]}" w="125" h="20"  x="-125" y="20"  font_size="300" align="8" background_color="#000000c8" osd_configuration="2" />
+<osd enabled="yes" type="text" label="DTG 12 miles" w="150" h="20"  x="-150" y="0"  font_size="300" align="8" background_color="#000000c8" osd_configuration="2" />
+<!-- Time Remaining -->
+<osd enabled="yes" type="text" label="0:31" x="-150" y="20"  font_size="300" w="150" h="20" align="8" background_color="#000000c8" osd_configuration="2" />
+
 <!-- Arrival Time -->
-<osd enabled="yes" type="text" label="ETA ${navigation.item.destination_time[arrival]}" x="-125" y="40"  font_size="300" w="125" h="20" align="8" background_color="#000000c8" osd_configuration="2" />
+<osd enabled="yes" type="text" label="ETA 2:30PM" x="-150" y="40"  font_size="300" w="150" h="20" align="8" background_color="#000000c8" osd_configuration="2" />
 
 <!-- BOTTOM -->
 <!-- Current Altitude -->
-<osd enabled="yes" type="text" label="ALT ${vehicle.position_height}" x="0" y="-20"  font_size="200" w="60" h="20" align="0" background_color="#000000c8"/>
+<!-- <osd enabled="yes" type="text" label="ALT ${vehicle.position_height}" x="0" y="-20"  font_size="200" w="60" h="20" align="0" background_color="#000000c8"/> -->
 <!-- Current Direction -->
-<osd enabled="yes" type="text" label="${vehicle.position_direction}°" x="0" y="-40"  font_size="200" w="60" h="20" align="0" background_color="#000000c8"/>
+<!-- <osd enabled="yes" type="text" label="${vehicle.position_direction}°" x="0" y="-40"  font_size="200" w="60" h="20" align="0" background_color="#000000c8"/> -->
+<osd name="future_wx" enabled="yes" type="button" x="0" y="-40" w="60" h="20" src="$HOME/navit-build/navit/icons/tstorm.svg" use_overlay="1" background_color="#000000c8" accesskey=" " command='' />
+<osd enabled="yes" type="text" label="50%" x="0" y="-20"  font_size="200" w="60" h="20" align="0" background_color="#000000c8"/>
+<osd enabled="yes" type="text" label="in 30 min" x="60" y="-40"  font_size="300" w="100" h="40" align="0" background_color="#000000c8" />
+
 <!-- Current Street -->
-<osd enabled="yes" type="text" label="${tracking.item.street_name} ${tracking.item.street_name_systematic}" x="60" y="-40"  font_size="500" w="764" h="40" align="0" background_color="#000000c8"/>
+<!-- <osd enabled="yes" type="text" label= "${tracking.item.street_name} ${tracking.item.street_name_systematic}" x="60" y="-80"  font_size="500" w="764" h="40" align="0" background_color="#000000c8"/> -->
+<osd enabled="yes" type="text" label= "Olivia Ave" x="0" y="-80"  font_size="500" w="824" h="40" align="0" background_color="#000000c8"/>
 <!-- Speed Warner -->
 <osd enabled="yes" type="speed_warner" w="100" h="40" x="-300" y="-40" font_size="500" speed_exceed_limit_offset="15" speed_exceed_limit_percent="10" announce_on="1" background_color="#00000000" label="text_only" align="8"/>
 <!-- Current Speed -->
-<osd enabled="yes" type="text" label="${vehicle.position_speed}" x="-200" y="-40" font_size="500" w="150" h="40" align="0" background_color="#000000c8"/>
-<!-- GPS Status -->
-<osd enabled="yes" type="gps_status" x="-50" y="-40" w="50" h="40" background_color="#000000c8"/>
+<!--<osd enabled="yes" type="text" label="${vehicle.position_speed}" x="-200" y="-40" font_size="500" w="150" h="40" align="0" background_color="#000000c8"/>-->
+<!-- Current Temperature -->
+<osd enabled="yes" type="text" label="70°" x="-210" y="-40" font_size="300" w="65" h="40" align="0" background_color="#000000c8"/>
+<osd enabled="yes" type="text" label="Tornado Warning" x="-632" y="-40" font_size="300" w="427" h="40" align="0" background_color="#ff0000"/>
+<osd enabled="yes" type="text" label="1:59PM" x="-100" y="-40" font_size="300" w="100" h="40" align="0" background_color="#000000c8"/>
+
+<!-- GPS Status background_color="#000000c8"
+<osd enabled="yes" type="gps_status" x="-50" y="-40" w="50" h="40" background_color="#000000c8"/>-->
 
 <!-- RIGHT CONTROLS -->
 <!-- Fullscreen (shortcut: f)-->
@@ -509,11 +523,8 @@ osd[@name=="button_fullscreen"].src = gui.fullscreen==0?"toggle_fullscreen.xpm":
 
 <!-- RIGHT CORNER ICONS -->
 <!-- Enable/Disable 3D View (shortcut: SPACE) -->
-<osd name="button_3d" enabled="yes" type="button" x="-140" y="-105" src="$HOME/.navit/displays/3D.xpm" use_overlay="1" accesskey=" " command='
-pitch=pitch==0?20:0;
-orientation=pitch==0?0:-1;
-osd[@name=="button_3d"].src = pitch==0?"$HOME/.navit/displays/3D.xpm":"$HOME/.navit/displays/2D.xpm";
-zoom=pitch==0?200:15;
+<osd name="current_wx" enabled="yes" type="button" x="-145" y="-40" w="45" h="40" src="$HOME/navit-build/navit/icons/clear_day.svg" use_overlay="1" background_color="#000000c8" accesskey=" " command='
+
 ' 
 />
 
