@@ -161,8 +161,10 @@ static void on_simple_ready(GObject *source_object,
  */
 static int vehicle_geoclue_position_attr_get(struct vehicle_priv *priv,
         enum attr_type type, struct attr *attr) {
+    printf("geoclue\n");
     switch(type) {
     case attr_position_height:
+        priv->height = 100;
         attr->u.numd = &priv->height;
         break;
     case attr_position_speed:
@@ -210,7 +212,7 @@ static struct vehicle_priv *vehicle_geoclue_new(struct vehicle_methods *meth,
         struct attr **attrs) {
     struct vehicle_priv *ret;
     dbg(lvl_debug, "enter");
-
+    printf("vehicle_geoclue_new\n");
     *meth = vehicle_geoclue_methods;
 
     ret = (struct vehicle_priv*)g_new0(struct vehicle_priv, 1);

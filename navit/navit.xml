@@ -408,6 +408,7 @@ Waypoint</text></img>
 		<!--
 		Instead of using a speech synthesizer, navit can also play pre-recorded samples for each word.
 		See http://wiki.navit-project.org/index.php/Configuration for details.
+
 		<speech type="cmdline" data="aplay -q %s"
 		sample_dir="/path/to/sampledir" sample_suffix=".wav" flags="1"
 		vocabulary_name="0" vocabulary_name_systematic="0" vocabulary_distances="0"/>
@@ -432,7 +433,7 @@ Waypoint</text></img>
 
 		<!-- Mapset template for OpenStreetMap -->
 		<mapset enabled="yes">
-			<map type="binfile" enabled="yes" data="$NAVIT_SHAREDIR/maps/osm_bbox_-85.7,42.0,-82.6,44.7.bin"/>
+			<map type="binfile" enabled="yes" data="$NAVIT_SHAREDIR/maps/osm_bbox_-86.8,41.5,-81.9,45.6.bin"/>
 		</mapset>
 
 		<!-- Mapset template for garmin maps -->
@@ -481,11 +482,11 @@ Waypoint</text></img>
 <osd enabled="yes" type="text" label="0:31" x="-150" y="20"  font_size="300" w="150" h="20" align="8" background_color="#000000c8" osd_configuration="2" />
 
 <!-- Arrival Time -->
-<!-- <osd enabled="yes" type="text" label="ETA 2:30PM" x="-150" y="40"  font_size="300" w="150" h="20" align="8" background_color="#000000c8" osd_configuration="2" /> -->
+<osd enabled="yes" type="text" label="ETA 2:30PM" x="-150" y="40"  font_size="300" w="150" h="20" align="8" background_color="#000000c8" osd_configuration="2" />
 
 <!-- BOTTOM -->
 <!-- Current Altitude -->
-<osd enabled="yes" type="text" label="ALT2 ${vehicle.position_height}" x="-150" y="40"  font_size="200" w="60" h="20" align="0" background_color="#000000c8"/>
+<!-- <osd enabled="yes" type="text" label="ALT ${vehicle.position_height}" x="0" y="-20"  font_size="200" w="60" h="20" align="0" background_color="#000000c8"/> -->
 <!-- Current Direction -->
 <!-- <osd enabled="yes" type="text" label="${vehicle.position_direction}°" x="0" y="-40"  font_size="200" w="60" h="20" align="0" background_color="#000000c8"/> -->
 <osd name="future_wx" enabled="yes" type="button" x="0" y="-40" w="60" h="20" src="$HOME/navit-build/navit/icons/tstorm.svg" use_overlay="1" background_color="#000000c8" accesskey=" " command='' />
@@ -523,6 +524,7 @@ osd[@name=="button_fullscreen"].src = gui.fullscreen==0?"toggle_fullscreen.xpm":
 <!-- RIGHT CORNER ICONS -->
 <!-- Enable/Disable 3D View (shortcut: SPACE) -->
 <osd name="current_wx" enabled="yes" type="button" x="-145" y="-40" w="45" h="40" src="$HOME/navit-build/navit/icons/clear_day.svg" use_overlay="1" background_color="#000000c8" accesskey=" " command='
+
 ' 
 />
 

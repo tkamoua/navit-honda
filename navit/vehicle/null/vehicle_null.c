@@ -82,6 +82,7 @@ static int vehicle_null_position_attr_get(struct vehicle_priv *priv,
     dbg(lvl_debug,"enter %s",attr_to_name(type));
     switch (type) {
     case attr_position_height:
+        priv->height = 100;
         attr->u.numd = &priv->height;
         break;
     case attr_position_speed:

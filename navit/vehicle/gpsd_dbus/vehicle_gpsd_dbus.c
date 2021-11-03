@@ -148,6 +148,7 @@ static int vehicle_gpsd_dbus_position_attr_get(struct vehicle_priv *priv,
         enum attr_type type, struct attr *attr) {
     switch (type) {
     case attr_position_height:
+        //priv->altitude = 100;
         attr->u.numd = &priv->altitude;
         break;
     case attr_position_speed:
