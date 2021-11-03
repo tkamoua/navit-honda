@@ -926,6 +926,8 @@ struct graphics_image * graphics_image_new_scaled_rotated(struct graphics *gra, 
     char* hash_key = g_strdup_printf("%s*%d*%d*%d",path,w,h,rotate);
     struct file_wordexp *we;
     int i;
+    gra->font_size = 50;
+    dbg(lvl_debug,"in loop%sfor '%s'",this_?" ":" miss ",path);
     char **paths;
     if ( g_hash_table_lookup_extended( gra->image_cache_hash, hash_key, NULL, (gpointer)&this_) ) {
         g_free(hash_key);
@@ -1008,7 +1010,7 @@ struct graphics_image * graphics_image_new_scaled_rotated(struct graphics *gra, 
     file_wordexp_destroy(we);
 
     if (! this_->priv) {
-        dbg(lvl_error,"No image for '%s'", path);
+        dbg(lvl_error,"No image for hi '%s'", path);
         g_free(this_);
         this_=NULL;
     }

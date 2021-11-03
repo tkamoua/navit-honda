@@ -323,6 +323,7 @@ int tracking_get_attr(struct tracking *_this, enum attr_type type, struct attr *
     struct map_rect *mr;
     struct tracking_line *tl;
 
+    
     int result=0;
     dbg(lvl_debug,"enter %s",attr_to_name(type));
     if (_this->attr) {
@@ -1159,5 +1160,6 @@ static struct map_priv *tracking_map_new(struct map_methods *meth, struct attr *
 
 
 void tracking_init(void) {
+    dbg(lvl_debug,"tracking_init")
     plugin_register_category_map("tracking", tracking_map_new);
 }
