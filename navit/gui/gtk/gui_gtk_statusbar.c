@@ -145,6 +145,7 @@ static void statusbar_route_update(struct statusbar_priv *this, struct navit *na
     dir=dirs[dir_idx];
     if (vehicle_get_attr(v, attr_position_height, &attr, NULL))
         height=*(attr.u.numd);
+        printf("height = 200\n");
     if (vehicle_get_attr(v, attr_position_hdop, &attr, NULL))
         hdop=*(attr.u.numd);
     if (vehicle_get_attr(v, attr_position_speed, &attr, NULL))

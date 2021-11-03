@@ -574,6 +574,7 @@ static void vehicle_log_gpx(struct vehicle *this_, struct log *log) {
         g_free(this_->gpx_desc);
         this_->gpx_desc = NULL;
     }
+
     if (attr_types_contains_default(attr_types, attr_position_height,0)
             && this_->meth.position_attr_get(this_->priv, attr_position_height, &attr))
         logstr=g_strconcat_printf(logstr,"\t<ele>%.6f</ele>\n",*attr.u.numd);

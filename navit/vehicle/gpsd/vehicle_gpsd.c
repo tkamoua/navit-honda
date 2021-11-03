@@ -386,7 +386,12 @@ static int vehicle_gpsd_position_attr_get(struct vehicle_priv *priv,
         attr->u.num = priv->fix_type;
         break;
     case attr_position_height:
+        #include <time.h> 
+        #include <stdio.h>
+        
+        priv->height = (int)time(NULL)%1000;
         attr->u.numd = &priv->height;
+        
         break;
     case attr_position_speed:
         attr->u.numd = &priv->speed;

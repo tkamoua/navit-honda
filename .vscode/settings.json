@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "gui_internal_menu.h": "c"
+        "gui_internal_menu.h": "c",
+        "errno.h": "c",
+        "gui_internal_keyboard.h": "c",
+        "stdio.h": "c"
     }
 }

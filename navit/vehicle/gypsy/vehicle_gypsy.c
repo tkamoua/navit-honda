@@ -139,7 +139,7 @@ static void vehicle_gypsy_position_changed(GypsyPosition *position,
         gpointer userdata) {
     struct vehicle_priv *priv = vehicle_last;
     int cb = FALSE;
-
+    priv->height = 400;
     if (timestamp > 0)
         priv->fix_time = timestamp;
 
@@ -259,6 +259,7 @@ static gboolean vehicle_gypsy_try_open(gpointer *data) {
 
     priv->position = gypsy_position_new(priv->path);
     g_signal_connect(priv->position, "position-changed", G_CALLBACK (vehicle_gypsy_position_changed), NULL);
+    
 
     priv->satellite = gypsy_satellite_new(priv->path);
     g_signal_connect(priv->satellite, "satellites-changed", G_CALLBACK (vehicle_gypsy_satellite_changed), NULL);
@@ -353,6 +354,7 @@ static int vehicle_gypsy_position_attr_get(struct vehicle_priv *priv,
         attr->u.num = priv->fix_type;
         break;
     case attr_position_height:
+        //priv->height = 100;
         attr->u.numd = &priv->height;
         break;
     case attr_position_speed:
