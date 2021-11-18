@@ -324,6 +324,7 @@ struct navigation_way {
     char *exit_ref;				/**< Exit_ref if found on the first node of the way*/
     char *exit_label;			/**< Exit_label if found on the first node of the way*/
     struct street_destination *destination;	/**< The destination this way leads to (OSM: {@code destination}) */
+    char *test;
 };
 
 struct navigation_itm {
@@ -1082,6 +1083,7 @@ static void navigation_way_init(struct navigation_way *w) {
     struct map_rect *mr;
     struct attr attr;
 
+    w->test = "test";
     w->angle2 = invalid_angle;
     mr = map_rect_new(w->item.map, NULL);
     if (!mr)
@@ -3988,14 +3990,35 @@ static int navigation_map_item_attr_get(void *priv_data, enum attr_type attr_typ
         this_->attr_next=attr_street_name;
         return 1;
     case attr_street_name:
-        attr->u.str=itm->way.name;
+        //char * name[100];
+        //char * systematic[100];
+        //sprintf(name,"%s",&itm->way.name);
+
+        //sprintf(itm->way.name,itm->way.name_systematic);
+        attr->u.str=g_strdup_printf("%s %s",itm->way.name,itm->way.name_systematic);
         this_->attr_next=attr_street_name_systematic;
         if (attr->u.str) {
             return 1;
         }
         return 0;
     case attr_street_name_systematic:
-        attr->u.str=itm->way.name_systematic;
+        if (fopen("/home/mcg3/Desktop/text.txt", "r") == NULL)
+        {   
+            printf("Error: could not open file");
+            //return 1;
+        }
+
+        // reading line by line, max 256 bytes
+        //const unsigned MAX_LENGTH = 256;
+        char * buffer[256];
+
+        fgets(buffer, 256, fopen("/home/mcg3/Desktop/text.txt", "r"));
+        //printf("%s", buffer);
+
+        // close the file
+        //fclose(fp);
+
+        attr->u.str= buffer;//itm->way.name_systematic;
         this_->attr_next=attr_street_destination;
         if (attr->u.str) {
             return 1;
