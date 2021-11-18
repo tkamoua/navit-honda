@@ -3980,7 +3980,7 @@ static int navigation_map_item_attr_get(void *priv_data, enum attr_type attr_typ
         }
         return 0;
     case attr_destination_length:
-        attr->u.num=itm->dest_length;
+        attr->u.num=itm->dest_length/1609;
         this_->attr_next=attr_destination_time;
         return 1;
     case attr_destination_time:
