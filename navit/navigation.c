@@ -3909,6 +3909,23 @@ static void navigation_map_item_coord_rewind(void *priv_data) {
     this->ccount=0;
 }
 
+void removeChar(char * str, char charToRemmove){
+    int i, j;
+    int len = strlen(str);
+    for(i=0; i<len; i++)
+    {
+        if(str[i] == charToRemmove)
+        {
+            for(j=i; j<len; j++)
+            {
+                str[j] = str[j+1];
+            }
+            len--;
+            i--;
+        }
+    }
+    
+}
 
 static int navigation_map_item_attr_get(void *priv_data, enum attr_type attr_type, struct attr *attr) {
     struct map_rect_priv *this_=priv_data;
@@ -4002,7 +4019,7 @@ static int navigation_map_item_attr_get(void *priv_data, enum attr_type attr_typ
         }
         return 0;
     case attr_street_name_systematic:
-        if (fopen("/home/mcg3/Desktop/text.txt", "r") == NULL)
+        if (FALSE)
         {   
             printf("Error: could not open file");
             //return 1;
@@ -4011,14 +4028,15 @@ static int navigation_map_item_attr_get(void *priv_data, enum attr_type attr_typ
         // reading line by line, max 256 bytes
         //const unsigned MAX_LENGTH = 256;
         char * buffer[256];
+        FILE *fp  = fopen("/home/mcg3/Desktop/text.txt", "r");
 
-        fgets(buffer, 256, fopen("/home/mcg3/Desktop/text.txt", "r"));
-        //printf("%s", buffer);
+        fgets(buffer, 256, fp);
 
         // close the file
-        //fclose(fp);
-
-        attr->u.str= buffer;//itm->way.name_systematic;
+        fclose(fp);
+        //print(buffer);
+        removeChar(buffer,'\n');
+        attr->u.str= g_strdup_printf("%s", buffer);//itm->way.name_systematic;
         this_->attr_next=attr_street_destination;
         if (attr->u.str) {
             return 1;
