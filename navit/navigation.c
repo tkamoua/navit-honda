@@ -4028,7 +4028,7 @@ static int navigation_map_item_attr_get(void *priv_data, enum attr_type attr_typ
         // reading line by line, max 256 bytes
         //const unsigned MAX_LENGTH = 256;
         char * buffer[256];
-        FILE *fp  = fopen("/home/mcg3/Desktop/text.txt", "r");
+        FILE *fp  = fopen("../../navit-honda/navit/wxalerts.txt", "r");
 
         fgets(buffer, 256, fp);
 
