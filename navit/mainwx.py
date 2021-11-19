@@ -1,12 +1,29 @@
 from wxalerts import *
+from weather_forecast import *
 import time
 import gpsd
 
 
 gpsd.connect()
+lat = 42
+lon = -83
+counter = 0
 while(True):
-    packet = gpsd.get_current()
-    lat = packet.lat
-    lon = packet.lon
+    try:
+        packet = gpsd.get_current()
+        lat = packet.lat
+        lon = packet.lon
+    except:
+        pass
     time.sleep(5)
-    get_alerts(lat,lon)
+    print(lat," ",lon)
+    try:
+        get_alerts(lat,lon)
+    except:
+        pass
+
+    try:
+        get_forecast_main(lat,lon)
+    except:
+        pass
+    counter = counter + 1
