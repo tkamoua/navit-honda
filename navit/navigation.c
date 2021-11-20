@@ -4053,7 +4053,7 @@ static int navigation_map_item_attr_get(void *priv_data, enum attr_type attr_typ
         // reading line by line, max 256 bytes
         //const unsigned MAX_LENGTH = 256;
         char * buffer1[256];
-        FILE *fp1  = fopen("../../navit-honda/navit/icon_forecast.txt", "r");
+        FILE *fp1  = fopen("../../navit-honda/navit/time_forecast.txt", "r");
 
         fgets(buffer1, 256, fp1);
 

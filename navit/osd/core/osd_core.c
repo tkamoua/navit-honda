@@ -3549,7 +3549,7 @@ static void osd_gps_status_draw(struct osd_priv_common *opc, struct navit *navit
     if (do_draw) {
         osd_fill_with_bgcolor(&opc->osd_item);
         if (this->active) {
-            printf(this->icon_src, strength);
+            //printf(this->icon_src, strength);
             image = g_strdup_printf(this->icon_src, strength);//"/home/mcg3/navit-build/navit/icons/tstorm.svg";//g_strdup_printf(this->icon_src, strength);
             gr_image = graphics_image_new_scaled(opc->osd_item.gr, image, this->icon_w, this->icon_h);
             if (gr_image) {
