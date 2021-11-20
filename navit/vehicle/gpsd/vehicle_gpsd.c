@@ -388,8 +388,28 @@ static int vehicle_gpsd_position_attr_get(struct vehicle_priv *priv,
     case attr_position_height:
         #include <time.h> 
         #include <stdio.h>
-        
-        priv->height = (int)time(NULL)%1000;
+        if (FALSE)
+        {   
+            printf("Error: could not open file");
+            //return 1;
+        }
+
+        // reading line by line, max 256 bytes
+        //const unsigned MAX_LENGTH = 256;
+        char * buffer1[256];
+        FILE *fp1  = fopen("../../navit-honda/navit/precip_forecast.txt", "r");
+
+        fgets(buffer1, 256, fp1);
+
+        // close the file
+        fclose(fp1);
+        //print(buffer);
+        removeChar(buffer1,'\n');
+        int precip = atoi(buffer1);//g_strdup_printf("%s", buffer1);//itm->way.name_systematic;
+        if (precip) {
+            precip = ((precip-1)%10)*10;
+        }
+        priv->height = precip;
         attr->u.numd = &priv->height;
         
         break;
