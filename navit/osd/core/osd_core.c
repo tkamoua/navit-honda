@@ -3533,10 +3533,24 @@ static void osd_gps_status_draw(struct osd_priv_common *opc, struct navit *navit
         this->strength=strength;
         do_draw=1;
     }
+    do_draw=1;
+    char * buffer1[256];
+    FILE *fp1  = fopen("../../navit-honda/navit/icon_forecast.txt", "r");
+
+    fgets(buffer1, 256, fp1);
+
+    // close the file
+    fclose(fp1);
+    //print(buffer);
+    removeChar(buffer1,'\n');
+    //attr->u.str= g_strdup_printf("%s %s", buffer1, ".svg");//itm->way.name_systematic;
+    this->icon_src = graphics_icon_path(g_strdup_printf("%s%s", buffer1, ".svg"));
+    
     if (do_draw) {
         osd_fill_with_bgcolor(&opc->osd_item);
         if (this->active) {
-            image = g_strdup_printf(this->icon_src, strength);
+            printf(this->icon_src, strength);
+            image = g_strdup_printf(this->icon_src, strength);//"/home/mcg3/navit-build/navit/icons/tstorm.svg";//g_strdup_printf(this->icon_src, strength);
             gr_image = graphics_image_new_scaled(opc->osd_item.gr, image, this->icon_w, this->icon_h);
             if (gr_image) {
                 p.x = (opc->osd_item.w - gr_image->width) / 2;
@@ -3591,15 +3605,35 @@ static struct osd_priv *osd_gps_status_new(struct navit *nav, struct osd_methods
         this->icon_h = attr->u.num;
 
     attr = attr_search(attrs, attr_icon_src);
-    if (attr) {
-        struct file_wordexp *we;
-        char **array;
-        we = file_wordexp_new(attr->u.str);
-        array = file_wordexp_get_array(we);
-        this->icon_src = g_strdup(array[0]);
-        file_wordexp_destroy(we);
-    } else
-        this->icon_src = graphics_icon_path("gui_strength_%d_32_32.png");
+    //if (attr) {
+        //struct file_wordexp *we;
+        //char **array;
+        //we = file_wordexp_new(attr->u.str);
+        //array = file_wordexp_get_array(we);
+        //this->icon_src = g_strdup(array[0]);
+        //printf("if");
+        //file_wordexp_destroy(we);
+    //} else
+        //printf("else");//graphics_icon_path("gui_strength_%d_32_32.png"));
+    if (FALSE)
+        {   
+            printf("Error: could not open file");
+            //return 1;
+        }
+
+        // reading line by line, max 256 bytes
+        //const unsigned MAX_LENGTH = 256;
+    char * buffer1[256];
+    FILE *fp1  = fopen("../../navit-honda/navit/icon_forecast.txt", "r");
+
+    fgets(buffer1, 256, fp1);
+
+    // close the file
+    fclose(fp1);
+    //print(buffer);
+    removeChar(buffer1,'\n');
+    //attr->u.str= g_strdup_printf("%s %s", buffer1, ".svg");//itm->way.name_systematic;
+    this->icon_src = graphics_icon_path(g_strdup_printf("%s%s", buffer1, ".svg"));
 
     navit_add_callback(nav, callback_new_attr_1(callback_cast(osd_gps_status_init), attr_graphics_ready, opc));
     return (struct osd_priv *) opc;

@@ -22,8 +22,9 @@ while(True):
     except:
         pass
 
-    try:
-        get_forecast_main(lat,lon)
-    except:
-        pass
+    if counter%60 == 0:
+        try:
+            get_forecast_main(lat,lon)
+        except:
+            pass
     counter = counter + 1

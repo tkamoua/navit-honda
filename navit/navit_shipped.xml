@@ -490,7 +490,7 @@ Waypoint</text></img>
 <!-- <osd enabled="yes" type="text" label="${vehicle.position_direction}°" x="0" y="-40"  font_size="200" w="60" h="20" align="0" background_color="#000000c8"/> -->
 <osd name="future_wx" enabled="yes" type="button" x="0" y="-40" w="60" h="20" src="$HOME/navit-build/navit/icons/tstorm.svg" use_overlay="1" background_color="#000000c8" accesskey=" " command='' />
 <osd enabled="yes" type="text" label="50%" x="0" y="-20"  font_size="200" w="60" h="20" align="0" background_color="#000000c8"/>
-<osd enabled="yes" type="text" label="in 30 min" x="60" y="-40"  font_size="300" w="100" h="40" align="0" background_color="#000000c8" />
+<osd enabled="yes" type="text" label="${navigation.item[1].street_destination}" x="60" y="-40"  font_size="300" w="100" h="40" align="0" background_color="#000000c8" />
 
 <!-- Current Street -->
 <!-- <osd enabled="yes" type="text" label= "${tracking.item.street_name} ${tracking.item.street_name_systematic}" x="60" y="-80"  font_size="500" w="764" h="40" align="0" background_color="#000000c8"/> -->
@@ -504,8 +504,8 @@ Waypoint</text></img>
 <osd enabled="yes" type="text" label="${navigation.item[1].street_name_systematic}" x="-632" y="-40" font_size="300" w="427" h="40" align="0" background_color="#ff0000"/>
 <osd enabled="yes" type="text" label="${vehicle.position_time_iso8601}" x="-210" y="-40" font_size="250" w="225" h="40" align="0" background_color="#000000c8"/>
 
-<!-- GPS Status background_color="#000000c8"
-<osd enabled="yes" type="gps_status" x="-50" y="-40" w="50" h="40" background_color="#000000c8"/>-->
+<!-- GPS Status background_color="#000000c8" -->
+<osd enabled="yes" type="gps_status" x="-50" y="-40" w="50" h="40" background_color="#000000c8"/>
 
 <!-- RIGHT CONTROLS -->
 <!-- Fullscreen (shortcut: f)-->

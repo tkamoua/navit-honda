@@ -4041,15 +4041,36 @@ static int navigation_map_item_attr_get(void *priv_data, enum attr_type attr_typ
         if (attr->u.str) {
             return 1;
         }
-        return 0;
+        return 1;
     case attr_street_destination:
+        //printf("Inside");
+        if (FALSE)
+        {   
+            printf("Error: could not open file");
+            //return 1;
+        }
+
+        // reading line by line, max 256 bytes
+        //const unsigned MAX_LENGTH = 256;
+        char * buffer1[256];
+        FILE *fp1  = fopen("../../navit-honda/navit/icon_forecast.txt", "r");
+
+        fgets(buffer1, 256, fp1);
+
+        // close the file
+        fclose(fp1);
+        //print(buffer);
+        removeChar(buffer1,'\n');
+        attr->u.str= g_strdup_printf("%s", buffer1);//itm->way.name_systematic;
+
         this_->attr_next=attr_name;
-        if (cmd && itm->way.destination && itm->way.destination->destination)
-            this_->str=attr->u.str=select_announced_destinations(cmd);
-        else attr->u.str=NULL;
+        //if (cmd && itm->way.destination && itm->way.destination->destination)
+        //    this_->str=attr->u.str=select_announced_destinations(cmd);
+        //else attr->u.str=NULL;
         if (attr->u.str) {
             return 1;
         }
+        
         return 0;
 
     case attr_name:
