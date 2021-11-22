@@ -45,10 +45,10 @@ def get_alerts(lat,lon):
                 best_event = event
                 best_score = score
     #f = open("wxalerts.txt", "w+")
-    print(best_event)
+    #print(best_event)
     fl = open("wxalerts.txt", "w+")
     if not(best_event==prev_alert):
-        print("Hi")
+        #print("Hi")
         fl = open("wxalerts.txt", "w+")
         fl.write(best_event)
         fl.close()

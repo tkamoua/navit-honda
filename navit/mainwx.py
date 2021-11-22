@@ -23,10 +23,10 @@ while(True):
     f.write(data)
     time.sleep(5)
     print(lat," ",lon)
-    # try:
-    get_alerts(lat,lon)
-    # except:
-    #     pass
+    try:
+        get_alerts(lat,lon)
+    except:
+        pass
 
     if counter%60 == 0:
         try:
