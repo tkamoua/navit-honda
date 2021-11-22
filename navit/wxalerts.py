@@ -26,7 +26,7 @@ def get_alerts(lat,lon):
     certainty_arr = ["Unknown", "Unlikely", "Possible", "Likely", "Observed"]
     alert_list = parsed_json['features']
     best_score = 0
-    best_event = " ."
+    best_event = " "
     fl = open("wxalerts.txt", "r")
     prev_alert = fl.readline()
     fl.close()
