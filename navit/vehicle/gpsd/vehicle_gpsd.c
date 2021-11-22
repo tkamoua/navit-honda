@@ -405,9 +405,11 @@ static int vehicle_gpsd_position_attr_get(struct vehicle_priv *priv,
         fclose(fp1);
         //print(buffer);
         removeChar(buffer1,'\n');
-        int precip = atoi(buffer1);//g_strdup_printf("%s", buffer1);//itm->way.name_systematic;
+        int precip = 0;
+        precip = atoi(buffer1);//g_strdup_printf("%s", buffer1);//itm->way.name_systematic;
         if (precip) {
-            precip = ((precip-1)%10)*10;
+            precip = precip/10;
+            precip = precip*10;
         }
         priv->height = precip;
         attr->u.numd = &priv->height;

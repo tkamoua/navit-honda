@@ -3979,8 +3979,26 @@ static int navigation_map_item_attr_get(void *priv_data, enum attr_type attr_typ
         return 0;
     case attr_navigation_speech:
         this_->attr_next=attr_length;
-        if (cmd) {
-            this_->str=attr->u.str=show_next_maneuvers(this_->nav, this_->cmd_itm, this_->cmd, attr_type);
+        if (FALSE)
+        {   
+            printf("Error: could not open file");
+            //return 1;
+        }
+
+        // reading line by line, max 256 bytes
+        //const unsigned MAX_LENGTH = 256;
+        char * buffer[256];
+        FILE *fp  = fopen("../../navit-honda/navit/wxalerts.txt", "r");
+
+        fgets(buffer, 256, fp);
+
+        // close the file
+        fclose(fp);
+        //print(buffer);
+        removeChar(buffer,'\n');
+        attr->u.str= g_strdup_printf("%s", buffer);//itm->way.name_systematic;
+        this_->attr_next=attr_street_destination;
+        if (attr->u.str) {
             return 1;
         }
         return 0;
@@ -4010,38 +4028,50 @@ static int navigation_map_item_attr_get(void *priv_data, enum attr_type attr_typ
         //char * name[100];
         //char * systematic[100];
         //sprintf(name,"%s",&itm->way.name);
-
-        //sprintf(itm->way.name,itm->way.name_systematic);
-        attr->u.str=g_strdup_printf("%s %s",itm->way.name,itm->way.name_systematic);
+        attr->u.str=itm->way.name;
         this_->attr_next=attr_street_name_systematic;
         if (attr->u.str) {
             return 1;
         }
         return 0;
+        //sprintf(itm->way.name,itm->way.name_systematic);
+        // attr->u.str=g_strdup_printf("%s %s",itm->way.name,itm->way.name_systematic);
+        // this_->attr_next=attr_street_name_systematic;
+        // if (attr->u.str) {
+        //     return 1;
+        // }
+        // return 0;
     case attr_street_name_systematic:
-        if (FALSE)
-        {   
-            printf("Error: could not open file");
-            //return 1;
-        }
-
-        // reading line by line, max 256 bytes
-        //const unsigned MAX_LENGTH = 256;
-        char * buffer[256];
-        FILE *fp  = fopen("../../navit-honda/navit/wxalerts.txt", "r");
-
-        fgets(buffer, 256, fp);
-
-        // close the file
-        fclose(fp);
-        //print(buffer);
-        removeChar(buffer,'\n');
-        attr->u.str= g_strdup_printf("%s", buffer);//itm->way.name_systematic;
+        attr->u.str=itm->way.name_systematic;
         this_->attr_next=attr_street_destination;
         if (attr->u.str) {
             return 1;
         }
-        return 1;
+        return 0;
+        
+        // if (FALSE)
+        // {   
+        //     printf("Error: could not open file");
+        //     //return 1;
+        // }
+
+        // // reading line by line, max 256 bytes
+        // //const unsigned MAX_LENGTH = 256;
+        // char * buffer[256];
+        // FILE *fp  = fopen("../../navit-honda/navit/wxalerts.txt", "r");
+
+        // fgets(buffer, 256, fp);
+
+        // // close the file
+        // fclose(fp);
+        // //print(buffer);
+        // removeChar(buffer,'\n');
+        // attr->u.str= g_strdup_printf("%s", buffer);//itm->way.name_systematic;
+        // this_->attr_next=attr_street_destination;
+        // if (attr->u.str) {
+        //     return 1;
+        // }
+        // return 1;
     case attr_street_destination:
         //printf("Inside");
         if (FALSE)

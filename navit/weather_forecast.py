@@ -54,7 +54,7 @@ def get_forecast_main(lat, lon):
         # precip continuing
         else:
              f = open("time_forecast.txt", "w+")
-             f.write("For 30 minutes")
+             f.write("For 30+ minutes")
              f = open("precip_forecast.txt", "w+")
              f.write(str(prob_arr[0]))
              f = open("icon_forecast.txt", "w+")

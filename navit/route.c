@@ -4316,17 +4316,19 @@ int route_get_attr(struct route *this_, enum attr_type type, struct attr *attr, 
         attr->u.num=this_->route_status;
         break;
     case attr_destination_time:
-        if (this_->path2 && (this_->route_status == route_status_path_done_new
-                             || this_->route_status == route_status_path_done_incremental)) {
+        if (TRUE){//(this_->path2 && (this_->route_status == route_status_path_done_new
+                             //|| this_->route_status == route_status_path_done_incremental)) {
             struct route_path *path=this_->path2;
             attr->u.num=0;
             while (path) {
+                printf("%i",path->path_time);
                 attr->u.num+=path->path_time;
                 path=path->next;
             }
+        }
             dbg(lvl_debug,"path_time %ld",attr->u.num);
-        } else
-            ret=0;
+        //} else
+        //    ret=0;
         break;
     case attr_destination_length:
         if (this_->path2 && (this_->route_status == route_status_path_done_new

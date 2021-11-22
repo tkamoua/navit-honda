@@ -8,6 +8,7 @@ from urllib.request import urlopen
 import urllib.request as urllib2
 import json
 import numpy as np
+import time
 def index_equal(word, arr):
     arr = np.flip(arr)
     for ind, term in enumerate(arr):
@@ -16,7 +17,7 @@ def index_equal(word, arr):
     return -1
 def get_alerts(lat,lon):
     URL = ("https://api.weather.gov/alerts?active=true&point="
-    + str(lat) + "%2C" + str(lon))
+    + str(41.43) + "%2C" + str(-99.65))
     f = urllib2.urlopen(URL)
     json_string = f.read()
     parsed_json = json.loads(json_string)
@@ -25,7 +26,11 @@ def get_alerts(lat,lon):
     certainty_arr = ["Unknown", "Unlikely", "Possible", "Likely", "Observed"]
     alert_list = parsed_json['features']
     best_score = 0
-    best_event = "No Weather Alerts"
+    best_event = " ."
+    fl = open("wxalerts.txt", "r")
+    prev_alert = fl.readline()
+    fl.close()
+    print(prev_alert)
     for alert in alert_list:
         details = alert['properties']
         event = details['event']
@@ -35,8 +40,32 @@ def get_alerts(lat,lon):
         urgency = details['urgency'] #[ Immediate, Expected, Future, Past, Unknown ]
         certainty = details['certainty'] #[ Observed, Likely, Possible, Unlikely, Unknown ]
         score = index_equal(severity,severity_arr) + index_equal(urgency,urgency_arr) + index_equal(certainty, certainty_arr)
-        if score>best_score:
-            best_event = event
-            best_score = score
-    f = open("wxalerts.txt", "w+")
-    f.write(best_event)
+        if event!="Special Weather Statement":
+            if score>best_score:
+                best_event = event
+                best_score = score
+    #f = open("wxalerts.txt", "w+")
+    print(best_event)
+    fl = open("wxalerts.txt", "w+")
+    if not(best_event==prev_alert):
+        print("Hi")
+        fl = open("wxalerts.txt", "w+")
+        fl.write(best_event)
+        fl.close()
+        time.sleep(1)
+        fl = open("wxalerts.txt", "w+")
+        fl.write(" ")
+        fl.close()
+        time.sleep(1)
+        fl = open("wxalerts.txt", "w+")
+        fl.write(best_event)
+        fl.close()
+        time.sleep(1)
+        fl = open("wxalerts.txt", "w+")
+        fl.write(" ")
+        fl.close()
+        time.sleep(1)
+    
+    fl = open("wxalerts.txt", "w+")
+    fl.write(best_event)
+    fl.close()

@@ -404,7 +404,8 @@ Waypoint</text></img>
 		If you have a speech synthesizer like festival lite installed, you can get turn by turn directions out of navit. Please set the "cps"-value to how many characters your tts engine approximately speaks per second.
 		The default is text output to the shell
 		-->
-		<speech type="cmdline" data="echo 'Fix the speech tag in navit.xml to let navit say:' '%s'" cps="15"/>
+		<speech type="cmdline" data="espeak -s 150 -v english_rp %s"/>
+		<!-- <speech type="cmdline" data="echo 'Fix the speech tag in navit.xml to let navit say:' '%s'" cps="15"/> -->
 		<!--
 		Instead of using a speech synthesizer, navit can also play pre-recorded samples for each word.
 		See http://wiki.navit-project.org/index.php/Configuration for details.
@@ -432,7 +433,7 @@ Waypoint</text></img>
 
 		<!-- Mapset template for OpenStreetMap -->
 		<mapset enabled="yes">
-			<map type="binfile" enabled="yes" data="$NAVIT_SHAREDIR/maps/osm_bbox_-86.7,41.7,-82.2,45.8.bin"/>
+			<map type="binfile" enabled="yes" data="$NAVIT_SHAREDIR/maps/osm_bbox_-90.7,40.4,-80.2,46.5.bin"/>
 		</mapset>
 
 		<!-- Mapset template for garmin maps -->
@@ -476,9 +477,9 @@ Waypoint</text></img>
 
 <!-- TOP RIGHT -->
 <!-- Route Distance -->
-<osd enabled="yes" type="text" label="${navigation.route.destination_length}mi" w="150" h="20"  x="-150" y="0"  font_size="300" align="8" background_color="#000000c8" osd_configuration="2" />
+<osd enabled="yes" type="text" label="${navigation.route.destination_length}mi" w="150" h="40"  x="-150" y="0"  font_size="300" align="8" background_color="#000000c8" osd_configuration="2" />
 <!-- Time Remaining -->
-<osd enabled="yes" type="text" label="0:31" x="-150" y="20"  font_size="300" w="150" h="20" align="8" background_color="#000000c8" osd_configuration="2" />
+<!-- <osd enabled="yes" type="text" label="${navigation.route.destination_time}" x="-150" y="20"  font_size="300" w="150" h="20" align="8" background_color="#000000c8" osd_configuration="2" /> -->
 
 <!-- Arrival Time -->
 <!-- <osd enabled="yes" type="text" label="ETA 2:30PM" x="-150" y="40"  font_size="300" w="150" h="20" align="8" background_color="#000000c8" osd_configuration="2" /> -->
@@ -489,36 +490,36 @@ Waypoint</text></img>
 <!-- Current Direction -->
 <!-- <osd enabled="yes" type="text" label="${vehicle.position_direction}°" x="0" y="-40"  font_size="200" w="60" h="20" align="0" background_color="#000000c8"/> -->
 <!--<osd name="future_wx" enabled="yes" type="button" x="0" y="-40" w="60" h="20" src="$HOME/navit-build/navit/icons/tstorm.svg" use_overlay="1" background_color="#000000c8" accesskey=" " command='' />-->
-<osd enabled="yes" type="text" label="${vehicle.position_height}%" x="0" y="-20"  font_size="200" w="60" h="20" align="0" background_color="#000000c8"/>
-<osd enabled="yes" type="text" label="${navigation.item[1].street_destination}" x="60" y="-40"  font_size="200" w="100" h="40" align="0" background_color="#000000c8" />
+<osd enabled="yes" type="text" label="${vehicle.position_height}%" x="0" y="-20"  font_size="200" w="60" h="20" align="0" background_color="#000000"/>
+<osd enabled="yes" type="text" label="${navigation.item[1].street_destination}" x="60" y="-40"  font_size="200" w="110" h="40" align="0" background_color="#000000" />
 
 <!-- Current Street -->
 <!-- <osd enabled="yes" type="text" label= "${tracking.item.street_name} ${tracking.item.street_name_systematic}" x="60" y="-80"  font_size="500" w="764" h="40" align="0" background_color="#000000c8"/> -->
-<osd enabled="yes" type="text" label= "${tracking.item.street_name}" x="0" y="-80"  font_size="500" w="824" h="40" align="0" background_color="#000000c8"/>
+<osd enabled="yes" type="text" label= "${tracking.item.street_name} ${tracking.item.street_name_systematic}" x="0" y="-80"  font_size="500" w="824" h="40" align="0" background_color="#000000c8"/>
 <!-- Speed Warner -->
 <osd enabled="yes" type="speed_warner" w="100" h="40" x="-300" y="-40" font_size="500" speed_exceed_limit_offset="15" speed_exceed_limit_percent="10" announce_on="1" background_color="#00000000" label="text_only" align="8"/>
 <!-- Current Speed -->
 <!--<osd enabled="yes" type="text" label="${vehicle.position_speed}" x="-200" y="-40" font_size="500" w="150" h="40" align="0" background_color="#000000c8"/>-->
 <!-- Current Temperature -->
 <!-- <osd enabled="yes" type="text" label="${vehicle.position_nmae}" x="-210" y="-40" font_size="300" w="65" h="40" align="0" background_color="#000000c8"/> -->
-<osd enabled="yes" type="text" label="${navigation.item[1].street_name_systematic}" x="-632" y="-40" font_size="300" w="427" h="40" align="0" background_color="#ff0000"/>
-<osd enabled="yes" type="text" label="${vehicle.position_time_iso8601}" x="-205" y="-40" font_size="250" w="225" h="40" align="0" background_color="#000000c8"/>
+<osd enabled="yes" type="text" text_color="#ffff00" label="${navigation.item[1].navigation_speech}" x="-622" y="-40" font_size="300" w="417" h="40" align="0" background_color="#000000"/>
+<osd enabled="yes" type="text" label="${vehicle.position_time_iso8601}" x="-205" y="-40" font_size="250" w="225" h="40" align="0" background_color="#000000"/>
 
 <!-- GPS Status background_color="#000000c8" -->
-<osd enabled="yes" type="gps_status" x="0" y="-40" w="60" h="20" background_color="#000000c8"/>
+<osd enabled="yes" type="gps_status" x="0" y="-40" w="60" h="20" background_color="#000000"/>
 
 <!-- RIGHT CONTROLS -->
 <!-- Fullscreen (shortcut: f)-->
-<osd name="button_fullscreen" type="button" x="-80" y="100" src="toggle_fullscreen.xpm" use_overlay="1" accesskey="f" command='
+<!-- <osd name="button_fullscreen" type="button" x="-80" y="100" src="toggle_fullscreen.xpm" use_overlay="1" accesskey="f" command='
 gui.fullscreen=!gui.fullscreen;
 osd[@name=="button_fullscreen"].src = gui.fullscreen==0?"toggle_fullscreen.xpm":"menu.xpm"
-' />
+' /> -->
 <!-- Zoom In (shortcut: =)-->
-<osd type="button" x="-80" y="200" command="zoom_in()" src="zoom_in.xpm" use_overlay="1" accesskey="=" />
+<osd type="button" x="-50" y="50" command="zoom_in()" src="zoom_in.xpm" use_overlay="1" accesskey="=" />
 <!-- Scale -->
-<osd enabled="yes" type="scale" x="-90" y="290" font_size="150" w="100" h="30" align="0"/>
+<!-- <osd enabled="yes" type="scale" x="-90" y="290" font_size="150" w="100" h="30" align="0"/> -->
 <!-- Zoom Out (shortcut: -)-->
-<osd type="button" x="-80" y="300" command="zoom_out()" src="zoom_out.xpm" use_overlay="1" accesskey="-" />
+<osd type="button" x="-50" y="100" command="zoom_out()" src="zoom_out.xpm" use_overlay="1" accesskey="-" />
 
 <!-- RIGHT CORNER ICONS -->
 <!-- Enable/Disable 3D View (shortcut: SPACE) -->
