@@ -17,7 +17,7 @@ def index_equal(word, arr):
     return -1
 def get_alerts(lat,lon):
     URL = ("https://api.weather.gov/alerts?active=true&point="
-    + str(41.43) + "%2C" + str(-99.65))
+    + str(lat) + "%2C" + str(lon))
     f = urllib2.urlopen(URL)
     json_string = f.read()
     parsed_json = json.loads(json_string)
