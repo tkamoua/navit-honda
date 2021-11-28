@@ -3982,7 +3982,7 @@ static int navigation_map_item_attr_get(void *priv_data, enum attr_type attr_typ
         if (FALSE)
         {   
             printf("Error: could not open file");
-            //return 1;
+            //if statement needed to supress error;
         }
 
         // reading line by line, max 256 bytes
@@ -4017,14 +4017,14 @@ static int navigation_map_item_attr_get(void *priv_data, enum attr_type attr_typ
         }
         return 0;
     case attr_destination_length:
-        attr->u.num=itm->dest_length/1609;
+        attr->u.num=itm->dest_length/1609; //convert meters to miles
         this_->attr_next=attr_destination_time;
         return 1;
     case attr_destination_time:
         if (FALSE)
         {   
             printf("Error: could not open file");
-            //return 1;
+            //if statement needed to supress errors;
         }
 
         // reading line by line, max 256 bytes
@@ -4100,7 +4100,7 @@ static int navigation_map_item_attr_get(void *priv_data, enum attr_type attr_typ
         if (FALSE)
         {   
             printf("Error: could not open file");
-            //return 1;
+            //if statement needed to supress error;
         }
 
         // reading line by line, max 256 bytes
