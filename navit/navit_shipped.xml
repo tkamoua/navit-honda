@@ -464,15 +464,13 @@ Waypoint</text></img>
 			</layer>
 		</layout>
 
-		<!-- TOP LEFT -->
+<!-- TOP -->
 <!-- Distance to Next Maneouvre -->
-<!-- <osd enabled="yes" type="text" label="${navigation.item[1].length[named]}" x="0" y="0" font_size="350" w="75" h="30" align="0" background_color="#000000c8" osd_configuration="2" /> -->
 <osd enabled="yes" type="text" label="${navigation.item[1].length[named]}" x="0" y="0" font_size="350" w="75" h="30" align="0" background_color="#000000c8" osd_configuration="2" />
 <!-- Next Maneouvre Icon -->
 <osd enabled="yes" type="navigation_next_turn" x="0" y="30" background_color="#000000c8" w="75" osd_configuration="2" /> -->
 <!-- <osd name="turn" enabled="yes" type="button" x="0" y="30" w="75" src="$HOME/navit-build/navit/icons/nav_left_2_wh.svg" osd_configuration="2" use_overlay="1" background_color="#000000c8" accesskey=" " command='' /> -->
 <!-- Next Road --> 
-<!-- <osd enabled="yes" type="text" label="   ${navigation.item[1].street_name} ${navigation.item[1].street_name_systematic}" x="75" y="0" font_size="450" w="567" h="40" align="4" background_color="#000000c8" osd_configuration="2" /> -->
 <osd enabled="yes" type="text" label="${navigation.item[1].street_name}" x="75" y="0" font_size="450" w="567" h="40" align="4" background_color="#000000c8" osd_configuration="2" />
 
 <!-- TOP RIGHT -->
@@ -489,12 +487,12 @@ Waypoint</text></img>
 <!--<osd enabled="yes" type="text" label="ALT2 ${vehicle.position_height}" x="-150" y="40"  font_size="200" w="60" h="20" align="0" background_color="#000000c8"/>-->
 <!-- Current Direction -->
 <!-- <osd enabled="yes" type="text" label="${vehicle.position_direction}°" x="0" y="-40"  font_size="200" w="60" h="20" align="0" background_color="#000000c8"/> -->
-<!--<osd name="future_wx" enabled="yes" type="button" x="0" y="-40" w="60" h="20" src="$HOME/navit-build/navit/icons/tstorm.svg" use_overlay="1" background_color="#000000c8" accesskey=" " command='' />-->
+<!-- Percent Precipitation -->
 <osd enabled="yes" type="text" label="${vehicle.position_height}%" x="0" y="-20"  font_size="200" w="60" h="20" align="0" background_color="#000000"/>
+<!-- Time to Weather Clause -->
 <osd enabled="yes" type="text" label="${navigation.item[1].street_destination}" x="60" y="-40"  font_size="200" w="110" h="40" align="0" background_color="#000000" />
 
 <!-- Current Street -->
-<!-- <osd enabled="yes" type="text" label= "${tracking.item.street_name} ${tracking.item.street_name_systematic}" x="60" y="-80"  font_size="500" w="764" h="40" align="0" background_color="#000000c8"/> -->
 <osd enabled="yes" type="text" label= "${tracking.item.street_name} ${tracking.item.street_name_systematic}" x="0" y="-80"  font_size="500" w="824" h="40" align="0" background_color="#000000c8"/>
 <!-- Speed Warner -->
 <osd enabled="yes" type="speed_warner" w="100" h="40" x="-300" y="-40" font_size="500" speed_exceed_limit_offset="15" speed_exceed_limit_percent="10" announce_on="1" background_color="#00000000" label="text_only" align="8"/>
@@ -502,11 +500,14 @@ Waypoint</text></img>
 <!--<osd enabled="yes" type="text" label="${vehicle.position_speed}" x="-200" y="-40" font_size="500" w="150" h="40" align="0" background_color="#000000c8"/>-->
 <!-- Current Temperature -->
 <!-- <osd enabled="yes" type="text" label="${vehicle.position_nmae}" x="-210" y="-40" font_size="300" w="65" h="40" align="0" background_color="#000000c8"/> -->
+<!-- NWS Weather Alerts -->
 <osd enabled="yes" type="text" text_color="#ffff00" label="${navigation.item[1].navigation_speech}" x="-622" y="-40" font_size="300" w="387" h="40" align="0" background_color="#000000"/>
+<!-- UTC Time -->
 <osd enabled="yes" type="text" label="${vehicle.position_time_iso8601}" x="-205" y="-40" font_size="250" w="225" h="40" align="0" background_color="#000000"/>
+<!-- Currrent Temperature -->
 <osd enabled="yes" type="text" label="${navigation.route.destination_time}°" x="-235" y="-40" font_size="250" w="40" h="40" align="0" background_color="#000000"/>
 
-<!-- GPS Status background_color="#000000c8" -->
+<!-- Weather Icon -->
 <osd enabled="yes" type="gps_status" x="0" y="-40" w="60" h="20" background_color="#000000"/>
 
 <!-- RIGHT CONTROLS -->
