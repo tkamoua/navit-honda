@@ -502,8 +502,9 @@ Waypoint</text></img>
 <!--<osd enabled="yes" type="text" label="${vehicle.position_speed}" x="-200" y="-40" font_size="500" w="150" h="40" align="0" background_color="#000000c8"/>-->
 <!-- Current Temperature -->
 <!-- <osd enabled="yes" type="text" label="${vehicle.position_nmae}" x="-210" y="-40" font_size="300" w="65" h="40" align="0" background_color="#000000c8"/> -->
-<osd enabled="yes" type="text" text_color="#ffff00" label="${navigation.item[1].navigation_speech}" x="-622" y="-40" font_size="300" w="417" h="40" align="0" background_color="#000000"/>
+<osd enabled="yes" type="text" text_color="#ffff00" label="${navigation.item[1].navigation_speech}" x="-622" y="-40" font_size="300" w="387" h="40" align="0" background_color="#000000"/>
 <osd enabled="yes" type="text" label="${vehicle.position_time_iso8601}" x="-205" y="-40" font_size="250" w="225" h="40" align="0" background_color="#000000"/>
+<osd enabled="yes" type="text" label="${navigation.route.destination_time}°" x="-235" y="-40" font_size="250" w="40" h="40" align="0" background_color="#000000"/>
 
 <!-- GPS Status background_color="#000000c8" -->
 <osd enabled="yes" type="gps_status" x="0" y="-40" w="60" h="20" background_color="#000000"/>

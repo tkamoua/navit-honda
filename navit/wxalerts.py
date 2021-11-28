@@ -47,6 +47,7 @@ def get_alerts(lat,lon):
     #f = open("wxalerts.txt", "w+")
     #print(best_event)
     fl = open("wxalerts.txt", "w+")
+    #best_event = "Winter Weather Advisory"
     if not(best_event==prev_alert):
         #print("Hi")
         fl = open("wxalerts.txt", "w+")

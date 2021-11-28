@@ -4021,7 +4021,30 @@ static int navigation_map_item_attr_get(void *priv_data, enum attr_type attr_typ
         this_->attr_next=attr_destination_time;
         return 1;
     case attr_destination_time:
-        attr->u.num=itm->dest_time;
+        if (FALSE)
+        {   
+            printf("Error: could not open file");
+            //return 1;
+        }
+
+        // reading line by line, max 256 bytes
+        //const unsigned MAX_LENGTH = 256;
+        char * buffer3[256];
+        FILE *fp3  = fopen("../../navit-honda/navit/temp_forecast.txt", "r");
+
+        fgets(buffer3, 256, fp3);
+
+        // close the file
+        fclose(fp3);
+        //print(buffer);
+        removeChar(buffer3,'\n');
+        int temp = 0;
+        temp = atoi(buffer3);
+        //priv->sats = temp;
+
+
+
+        attr->u.num=temp;//itm->dest_time;
         this_->attr_next=attr_street_name;
         return 1;
     case attr_street_name:

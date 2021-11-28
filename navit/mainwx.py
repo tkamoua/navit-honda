@@ -28,7 +28,7 @@ while(True):
     except:
         pass
 
-    if counter%60 == 0:
+    if counter%30 == 0:
         try:
             get_forecast_main(lat,lon)
         except:

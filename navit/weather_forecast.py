@@ -21,13 +21,15 @@ def get_forecast_main(lat, lon):
         wx_code_arr = np.append(wx_code_arr, forc["values"]["weatherCode"])
         prob_arr = np.append(prob_arr, int(forc["values"]["precipitationProbability"]))
         temp_arr = np.append(temp_arr, forc["values"]["temperature"])
+    f2 = open("temp_forecast.txt", "w+")
+    f2.write(str(temp_arr[0]))
     # precip in the future/no precip
     if prob_arr[0] < 50:
         first_ind = np.argmax(prob_arr > 50)
         #precip in future
         if first_ind:
              f = open("time_forecast.txt", "w+")
-             f.write("In " + str(first_ind*5) + " minutes")
+             f.write("in " + str(first_ind*5) + " minutes")
              f = open("precip_forecast.txt", "w+")
              f.write(str(prob_arr[first_ind]))
              f = open("icon_forecast.txt", "w+")
@@ -35,7 +37,7 @@ def get_forecast_main(lat, lon):
         # no precip in future
         else:
              f = open("time_forecast.txt", "w+")
-             f.write("In 30 minutes")
+             f.write("in 30 minutes")
              f = open("precip_forecast.txt", "w+")
              f.write(str(prob_arr[-1]))
              f = open("icon_forecast.txt", "w+")
@@ -46,7 +48,7 @@ def get_forecast_main(lat, lon):
         #precip ending
         if end_ind:
              f = open("time_forecast.txt", "w+")
-             f.write("For " + str(end_ind*5) + " minutes")
+             f.write("for " + str(end_ind*5) + " minutes")
              f = open("precip_forecast.txt", "w+")
              f.write(str(prob_arr[0]))
              f = open("icon_forecast.txt", "w+")
@@ -54,7 +56,7 @@ def get_forecast_main(lat, lon):
         # precip continuing
         else:
              f = open("time_forecast.txt", "w+")
-             f.write("For 30+ minutes")
+             f.write("for 30+ minutes")
              f = open("precip_forecast.txt", "w+")
              f.write(str(prob_arr[0]))
              f = open("icon_forecast.txt", "w+")
@@ -122,7 +124,7 @@ def get_icon(lat, lon, wx_code, time):
     it_is_day = next_sunset_datetime < next_sunrise_datetime
     print("It's day." if it_is_day else "It's night.")
     img = codes[str(wx_code)]
-    if str(wx_code) in {"1000","1100","1101","1102"}:
+    if str(wx_code) in {"1000","1100","1101"}:
         sun = ""
         if it_is_day:
             sun = "day"
