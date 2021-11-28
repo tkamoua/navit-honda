@@ -3534,7 +3534,7 @@ static void osd_gps_status_draw(struct osd_priv_common *opc, struct navit *navit
         do_draw=1;
     }
     do_draw=1;
-    char * buffer1[256];
+    char * buffer1[256]; //get forecast icon graphic
     FILE *fp1  = fopen("../../navit-honda/navit/icon_forecast.txt", "r");
 
     fgets(buffer1, 256, fp1);
@@ -3544,7 +3544,7 @@ static void osd_gps_status_draw(struct osd_priv_common *opc, struct navit *navit
     //print(buffer);
     removeChar(buffer1,'\n');
     //attr->u.str= g_strdup_printf("%s %s", buffer1, ".svg");//itm->way.name_systematic;
-    this->icon_src = graphics_icon_path(g_strdup_printf("%s%s", buffer1, ".svg"));
+    this->icon_src = graphics_icon_path(g_strdup_printf("%s%s", buffer1, ".svg")); //set image to weather icon image
     
     if (do_draw) {
         osd_fill_with_bgcolor(&opc->osd_item);
