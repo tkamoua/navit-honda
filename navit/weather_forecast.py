@@ -74,7 +74,7 @@ def get_forecast(lat,lon,time):
     url = "https://api.tomorrow.io/v4/timelines"
     querystring = {"location": coor,"fields":["weatherCode",
                 "precipitationProbability","temperature"],"units":"imperial","timesteps":"5m",
-                "startTime":startTime, "endTime":endTime,"apikey":"ET05gU7mq7CClzvZLSbeHfZCTwfY50AR"}
+                "startTime":startTime, "endTime":endTime,"apikey":"add_api_key"}
     headers = {"Accept": "application/json"}
     response = requests.request("GET", url, headers=headers, params=querystring)
     data = json.loads(response.text)
